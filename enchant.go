@@ -30,7 +30,7 @@ type Enchant struct {
 // 			panic("Enchant error: " + err.Error())
 // 		}
 // 		defer enchant.Free()
-//      fmt.Println(fmt.DictExists("zh"))
+//      fmt.Println(enchant.DictExists("zh"))
 //
 // Because the Enchant package is a binding to Enchant C library, memory
 // allocated by the NewEnchant() call has to be disposed explicitly.
