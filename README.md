@@ -1,7 +1,7 @@
 Go-Enchant
 ==========
 
-Go-Enchant provides bindings for the C Enchant Spellcheck Library in Go. Instead of offering direct mappings to the Enchant functions, it abstracts away some complexity and makes it easier to do resource management in Go.
+Go-Enchant provides bindings for the C [Enchant Spellcheck Library](http://www.abisource.com/projects/enchant/) in Go. Instead of offering direct mappings to the Enchant functions, it abstracts away some complexity and makes it easier to do resource management in Go.
 
 ### Installation
 
