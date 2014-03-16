@@ -3,9 +3,18 @@ package enchant
 
 /*
 #cgo LDFLAGS: -lenchant
+#include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include "enchant/enchant.h"
+
+static size_t getLength(char ** c) {
+	return sizeof(c);
+}
+
+static char* getString(char ** c, int i) {
+    return c[i];
+}
 */
 import "C"
 
@@ -92,4 +101,30 @@ func (e *Enchant) Check(word string) bool {
 	s := (*C.ssize_t)(unsafe.Pointer(&size))
 
 	return C.enchant_dict_check(e.dict, cWord, *s) == 0
+}
+
+// Suggest words based on the given word.
+// This is a wrapper for enchant_dict_suggest.
+// It returns a slice of suggestion strings.
+func (e *Enchant) Suggest(word string) (suggestions []string) {
+	cWord := C.CString(word)
+	defer C.free(unsafe.Pointer(cWord))
+
+	size := uintptr(len(word))
+	s := (*C.ssize_t)(unsafe.Pointer(&size))
+
+	var n int
+	nSugg := uintptr(n)
+	ns := (*C.size_t)(unsafe.Pointer(&nSugg))
+
+	// get the suggestions; ns will be modified to store the
+	// number of suggestions returned
+	response := C.enchant_dict_suggest(e.dict, cWord, *s, ns)
+
+	for i := 0; i < int(*ns); i++ {
+		ci := C.int(i)
+		suggestions = append(suggestions, C.GoString(C.getString(response, ci)))
+	}
+
+	return suggestions
 }
