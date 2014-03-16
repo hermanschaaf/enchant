@@ -30,27 +30,30 @@ import (
 )
 
 func main() {
-	// 1. create a new enchant instance
-	enc, err := enc.NewEnchant()
+	// create a new enchant instance
+	enchant, err := enchant.NewEnchant()
 	if err != nil {
 		panic("Enchant error: " + err.Error())
 	}
 
-	// 2. defer freeing memory to the end of this program
-	defer enc.Free()
+	// defer freeing memory to the end of this program
+	defer enchant.Free()
 
-	// 3. check whether a certain dictionary exists on the system
-	has_en := enc.DictExists("en_GB")
+	// check whether a certain dictionary exists on the system
+	has_en := enchant.DictExists("en_GB")
 
-	// 4. load the english dictionary:
+	// load the english dictionary:
 	if has_en {
-		enc.LoadDict("en_GB")
+		enchant.LoadDict("en_GB")
 
-		// 5. see if a word is in the dictionary:
-		fmt.Println("hallo:", enc.Check("hallo"))
+		// see if a word is in the dictionary:
+		fmt.Println("hallo:", enchant.Check("hallo"))
 
 		// and one that won't be in there:
-		fmt.Println("wollo:", enc.Check("wollo"))
+		fmt.Println("wollo:", enchant.Check("wollo"))
+
+		// now let's get some suggestions for "wollo":
+		fmt.Println(enchant.Suggest("wollo"))
 	}
 }
 ```
@@ -68,7 +71,10 @@ func main() {
 ```
 hallo: true
 wollo: false
+[Rollo woolly hollow follow woollen would worldly]
 ```
+
+The final line is the result of our call to `enc.Suggest("wollo")`: it returns a slice of spelling suggestions for the given word.
 
 ### Documentation
 
