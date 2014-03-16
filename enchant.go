@@ -1,3 +1,4 @@
+// Package Enchant provides simplified bindings to Enchant spell checking library.
 package enchant
 
 /*

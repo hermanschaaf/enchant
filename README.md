@@ -59,9 +59,9 @@ func main() {
 
 2.  We defer a call to `enchant.Free()` to free memory allocation when our program ends. `Free()` handles the freeing of both the Enchant broker and loaded dictionaries.
 
-3.  Next, we check whether a certain dictionary is installed on the system using a call to `enc.DictExists`.
+3.  Next, we check whether a certain dictionary is installed on the system using a call to `enc.DictExists()`.
 
-4.  We know the dictionary exists now, so we load it into our Enchant instance with a call to `LoadDict`.
+4.  We know the dictionary exists now, so we load it into our Enchant instance with a call to `LoadDict()`.
 
 5.  Now we are free to make any calls to Enchant that we want. We call `Check`, which returns whether the given word is contained in the dictionary or not. We expect `"hallo"` to be in the dictionary, and `"wollo"` not to be. Indeed, our program output confirms this:
 
@@ -69,3 +69,7 @@ func main() {
 hallo: true
 wollo: false
 ```
+
+### Documentation
+
+Full documentation can be found at [godoc.org/github.com/hermanschaaf/enchant](http://godoc.org/github.com/hermanschaaf/enchant)
