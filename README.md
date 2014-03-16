@@ -21,7 +21,7 @@ go get github.com/hermanschaaf/enchant
 
 Basic usage is illustrated by the following example program:
 
-```
+```go
 package main
 
 import (
