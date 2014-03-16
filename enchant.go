@@ -1,4 +1,4 @@
-package main
+package enchant
 
 /*
 #cgo LDFLAGS: -lenchant
@@ -8,7 +8,6 @@ package main
 import "C"
 
 import (
-	"fmt"
 	"unsafe"
 )
 
@@ -59,12 +58,4 @@ func (e *Enchant) DictExists(name string) bool {
 
 	exists := C.enchant_broker_dict_exists(e.broker, cName)
 	return exists > 0
-}
-
-func main() {
-	e, err := NewEnchant()
-	defer e.Free()
-
-	// check that dictionary exists
-	fmt.Println(e.DictExists("en_US"), e.DictExists("nl"), e.DictExists("af"), e.DictExists("bla"))
 }
