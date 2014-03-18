@@ -48,6 +48,7 @@ type Enchant struct {
 func NewEnchant() (e *Enchant, err error) {
 	broker := C.enchant_broker_init()
 	e = &Enchant{broker, nil}
+	// we don't return errors at the moment, but we might in the future
 	return e, nil
 }
 
@@ -94,6 +95,10 @@ func (e *Enchant) LoadDict(name string) {
 // It returns a boolean value: true if the word is in the dictionary,
 // false otherwise.
 func (e *Enchant) Check(word string) bool {
+	if len(word) == 0 {
+		return true
+	}
+
 	cWord := C.CString(word)
 	defer C.free(unsafe.Pointer(cWord))
 
@@ -107,6 +112,10 @@ func (e *Enchant) Check(word string) bool {
 // This is a wrapper for enchant_dict_suggest.
 // It returns a slice of suggestion strings.
 func (e *Enchant) Suggest(word string) (suggestions []string) {
+	if len(word) == 0 {
+		return suggestions
+	}
+
 	cWord := C.CString(word)
 	defer C.free(unsafe.Pointer(cWord))
 

@@ -54,6 +54,7 @@ func TestLoadDictCheckAndSuggest(t *testing.T) {
 		Expect{"amazing", true},
 		Expect{"yoyoyoyo", false},
 		Expect{"nosuchword", false},
+		Expect{"大家好", false},
 	}
 
 	for _, c := range cases {
