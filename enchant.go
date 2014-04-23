@@ -8,10 +8,6 @@ package enchant
 #include <sys/types.h>
 #include "enchant/enchant.h"
 
-static size_t getLength(char ** c) {
-	return sizeof(c);
-}
-
 static char* getString(char ** c, int i) {
     return c[i];
 }
